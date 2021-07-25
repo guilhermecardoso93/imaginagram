@@ -7,9 +7,9 @@ import {
   USERS_LIKE_COUNT_CHANGE,
   USERS_LIKE_CHANGE,
   CLEAR_DATA,
-} from "../constants";
-import firebase from "firebase";
-import "firebase/firestore";
+} from '../constants';
+import firebase from 'firebase';
+import 'firebase/firestore';
 
 export const clearData = () => {
   return (dispatch) => dispatch({ type: CLEAR_DATA });
@@ -20,7 +20,7 @@ export const fetchUser = () => {
     const uid = firebase.auth().currentUser.uid;
     firebase
       .firestore()
-      .collection("users")
+      .collection('users')
       .doc(uid)
       .get()
       .then((snapshot) => {
@@ -36,10 +36,10 @@ export const fetchUserPosts = () => {
   return (dispatch) => {
     firebase
       .firestore()
-      .collection("posts")
+      .collection('posts')
       .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
-      .orderBy("creation", "asc")
+      .collection('userPosts')
+      .orderBy('creation', 'asc')
       .get()
       .then((snapshot) => {
         const posts = snapshot.docs.map((doc) => {
@@ -56,9 +56,9 @@ export const fetchUserFollowing = () => {
   return (dispatch) => {
     firebase
       .firestore()
-      .collection("following")
+      .collection('following')
       .doc(firebase.auth().currentUser.uid)
-      .collection("userFollowing")
+      .collection('userFollowing')
       .onSnapshot((snapshot) => {
         const following = snapshot.docs.map((doc) => doc.id);
         dispatch({ type: USER_FOLLOWING_CHANGE, following });
@@ -75,7 +75,7 @@ export const fetchUsersData = (uid, getPosts) => {
     if (!found) {
       firebase
         .firestore()
-        .collection("users")
+        .collection('users')
         .doc(uid)
         .get()
         .then((snapshot) => {
@@ -95,10 +95,10 @@ export function fetchUsersFollowingPosts(uid) {
   return (dispatch, getState) => {
     firebase
       .firestore()
-      .collection("posts")
+      .collection('posts')
       .doc(uid)
-      .collection("userPosts")
-      .orderBy("creation", "asc")
+      .collection('userPosts')
+      .orderBy('creation', 'asc')
       .get()
       .then((snapshot) => {
         const uid = snapshot.query.EP.path.segments[1];
@@ -123,11 +123,11 @@ export function fetchUsersFollowingLikes(uid, postId) {
   return (dispatch) => {
     firebase
       .firestore()
-      .collection("posts")
+      .collection('posts')
       .doc(uid)
-      .collection("userPosts")
+      .collection('userPosts')
       .doc(postId)
-      .collection("likes")
+      .collection('likes')
       .onSnapshot((snapshot) => {
         const likes = snapshot.docs.length;
         dispatch({ type: USERS_LIKE_COUNT_CHANGE, postId, likes });
@@ -135,11 +135,11 @@ export function fetchUsersFollowingLikes(uid, postId) {
 
     firebase
       .firestore()
-      .collection("posts")
+      .collection('posts')
       .doc(uid)
-      .collection("userPosts")
+      .collection('userPosts')
       .doc(postId)
-      .collection("likes")
+      .collection('likes')
       .doc(firebase.auth().currentUser.uid)
       .onSnapshot((snapshot) => {
         const postId = snapshot.ZE.path.segments[3];
