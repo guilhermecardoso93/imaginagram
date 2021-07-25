@@ -6,7 +6,7 @@ import "firebase/firestore";
 
 const Search = ({ navigation }) => {
 
-  const [users, setUsers] =  useState([]),
+  const [users, setUsers] =  useState([]);
 
   const fetchUsers = search => {
     firebase.firestore()

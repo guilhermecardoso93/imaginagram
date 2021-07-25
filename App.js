@@ -18,6 +18,7 @@ import Login from "./components/auth/Login";
 import Main from "./components/Main";
 import Add from "./components/main/Add";
 import Save from "./components/main/Save";
+import Comment from "./components/main/Comment";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBYzjm3nswJWsT3f0ceXtxxF7ciwhJNZ3w",
@@ -80,6 +81,7 @@ const App = () => {
           />
           <Stack.Screen name="Add" component={Add}/>
           <Stack.Screen name="Save" component={Save} />
+          <Stack.Screen name="Comment" component={Comment}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

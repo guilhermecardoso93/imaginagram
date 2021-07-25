@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchUser, fetchUserPosts } from "../redux/actions";
+import { fetchUser, fetchUserPosts, fetchUserFollowing } from "../redux/actions";
 
 import Feed from "./main/Feed";
 import Profile from "./main/Profile";
@@ -18,10 +18,11 @@ const Tab = createMaterialBottomTabNavigator();
 
 const Null = () => null;
 
-const Main = ({ currentUser, fetchUser, fetchUserPosts }) => {
+const Main = ({ currentUser, fetchUser, fetchUserPosts, fetchUserFollowing }) => {
   useEffect(() => {
     fetchUserPosts();
     fetchUser();
+    fetchUserFollowing();
   }, []);
   return (
     <Tab.Navigator
@@ -86,6 +87,6 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ fetchUser, fetchUserPosts }, dispatch);
+  bindActionCreators({ fetchUser, fetchUserPosts, fetchUserFollowing}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
